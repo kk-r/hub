@@ -123,7 +123,7 @@ func (r *request) addUser(ghUser *github.User) (*model.User, error) {
 
 	// Check if user exist
 	q := r.db.Model(&model.User{}).
-		Where("LOWER(github_login) = ? or github_login = ?", strings.ToLower(ghUser.GetLogin()), ghUser.GetLogin())
+		Where("LOWER(github_login) = ?", strings.ToLower(ghUser.GetLogin()))
 
 	var user model.User
 	err := q.First(&user).Error
